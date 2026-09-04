@@ -1,5 +1,6 @@
 import re
 class Skill_Tree_Recommender:
+    found = True
     exist = False
     def __init__(self):
       self.roadmaps = {
@@ -10,17 +11,22 @@ class Skill_Tree_Recommender:
         }
       
     def get_all_tracks(self):
-        print(list(self.roadmaps.keys()))
+        print('All Tracks We Have:',list(self.roadmaps.keys()))
     
     def get_Prequirements(self,track_name):
-        print(f" The full path : {self.roadmaps.get(track_name.title().strip() , 'This track is not found')}")
+        print(f"{self.roadmaps.get(track_name.title().strip() , 'This track is not found')}")
 
-    def get_path(self,track_name,current_level):
+    def is_track_exist(self,track_name):
         roadmap  = self.roadmaps.get(track_name.title().strip(','))
 
         if not roadmap :
+            Skill_Tree_Recommender.found = False
             print(f"This track is not found")
             return
+        Skill_Tree_Recommender.found = True
+
+    def get_path(self,track_name,current_level):
+        roadmap  = self.roadmaps.get(track_name.title().strip(','))
         current_level=[skill.strip().title() for skill in current_level.split(',')]
         roadmap=[skill.title() for skill in roadmap]
         path=roadmap.copy()
@@ -32,8 +38,10 @@ class Skill_Tree_Recommender:
               
             if not path:
                 print(f" Congratulations! You have finished this track!")
+                return
         else:
-            print(f" Your remaining skills in {track_name.title().strip()} track are: {path}")
+            print(f" Your remaining skills in {track_name.title().strip()} track are:")
+            print(*[f' {i}.{skill}' for i, skill in enumerate(path,1)], sep=' \n')
         
     def add_track(self,track_name,skill=None):
            track_name=re.search(track_name.strip(),' '.join(self.roadmaps.keys()),re.IGNORECASE)
@@ -46,7 +54,7 @@ class Skill_Tree_Recommender:
                 skills =[ s.strip() for s in skill.split(',')]
               else: 
                 skills = [] 
-              self.roadmaps.update({track_name.title().strip() : skills})
+              self.roadmaps.update({str(track_name).title().strip() : skills})
 
     def add_skill_to_track(self,track_name ,skill):
         track_name = track_name.title().strip()

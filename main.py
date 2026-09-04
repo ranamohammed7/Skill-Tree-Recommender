@@ -12,6 +12,13 @@ def show_menu():
     print('\n','='*50)
 
 
+def get_remaining_skills():
+        track_name = input("Enter the track name: ")
+        Skill_Tree_Recommender().is_track_exist(track_name) 
+        if Skill_Tree_Recommender().found==True:
+          current_level = input("Enter Your Skills(comma-separated): ")
+          Skill_Tree_Recommender().get_path(track_name, current_level)
+    
 def adding_track():
     track_name = input("Enter the track name: ")
     print(f"If You Want to Add Skills To Your new track: {track_name} Enter (Y) or (N) if you don't ")
@@ -31,6 +38,7 @@ def adding_skill_to_track():
         print("Track isn't found! Add it first!")
 
 
+
 while True:
  show_menu()
  choice = input("Enter your choice (1-6): ")
@@ -41,9 +49,7 @@ while True:
         track_name = input("Enter the track name: ")
         Skill_Tree_Recommender().get_Prequirements(track_name)
     case "3":
-        track_name = input("Enter the track name: ")
-        current_level = input("Enter Your Skills: ")
-        Skill_Tree_Recommender().get_path(track_name, current_level)
+        get_remaining_skills()
     case "4":
         adding_track()
     case "5":
