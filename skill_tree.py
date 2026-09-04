@@ -1,61 +1,64 @@
+import re
 class Skill_Tree_Recommender:
-    #track_name= track_name.title().strip()    عما أفكر فيها
+    exist = False
     def __init__(self):
       self.roadmaps = {
-            "Backend Developer": ["C++", "OOP", "Algorithms", "Data Structures"],
-            "Frontend Developer": ["HTML", "CSS", "JavaScript", "React"],
-            "AI": ["Python", "Linear Algebra", "Machine Learning", "Deep Learning"]
+            "Backend Developer": ["C++", "OOP", "Data Structures","Algorithms","SQL","Databases", "Git"],
+            "Frontend Developer": ["HTML", "CSS", "JavaScript", "TypeScript", "React" , "Web Performance" , "Git"],
+            "AI Engineer": ["Python", "Linear Algebra",  "Calculus" , "Data Structures", "Machine Learning", "Deep Learning",],
+            "Cyber Security": ["Linux" , "Networking" ,"Python","Web Security", "Ethical Hacking"]
         }
-
-      # print(self.roadmaps)
-
-
-    # لو لسه مبتديء وعايز الخريطة كاملة
+      
+    def get_all_tracks(self):
+        print(list(self.roadmaps.keys()))
+    
     def get_Prequirements(self,track_name):
-        return f" The full path :" ,self.roadmaps.get(track_name.title().strip() , "This track is not found")
-        # حذفت المسافة من اليمين والشمال وخليته يكبر الحرف في أول الكلمة
-
+        print(f" The full path : {self.roadmaps.get(track_name.title().strip() , 'This track is not found')}")
 
     def get_path(self,track_name,current_level):
-        path=[]
-        roadmap  = self.roadmaps.get(track_name.title().strip())
-        # print(roadmap)
+        roadmap  = self.roadmaps.get(track_name.title().strip(','))
 
         if not roadmap :
-            return f"This track is not found"
-
-        if current_level in roadmap:
-            idx = roadmap.index(current_level)
-            if idx + 1 < len(roadmap):
-                path += roadmap[idx+1:]
-                print("Remaining Steps :" , " --> ".join(path))
-                return f"The next skill: {roadmap[idx + 1]}"
+            print(f"This track is not found")
+            return
+        current_level=[skill.strip().title() for skill in current_level.split(',')]
+        roadmap=[skill.title() for skill in roadmap]
+        path=roadmap.copy()
+        for skill in current_level:
+            if skill in path:
+                path.remove(skill)
             else:
-                return f" Congratulations! You finish this track!"
+              print(f" {skill} is not required.")
+              
+            if not path:
+                print(f" Congratulations! You have finished this track!")
         else:
-            return f" this skill is not required."
-
+            print(f" Your remaining skills in {track_name.title().strip()} track are: {path}")
+        
     def add_track(self,track_name,skill=None):
-        skills = []
-        if skill != None:
-          skills = [skill]
-        self.roadmaps.update({track_name.title().strip() : skills})
-        # if isinstance(skill, list):
-        #     skills_list = skill
-        # else:
-        #     skills_list = [skill]
-
+           track_name=re.search(track_name.strip(),' '.join(self.roadmaps.keys()),re.IGNORECASE)
+           if track_name in self.roadmaps:
+               print(f"Track already exists!")
+           else:
+              if isinstance(skill, list) :
+                skills = skill
+              elif skill is not None:
+                skills =[ s.strip() for s in skill.split(',')]
+              else: 
+                skills = [] 
+              self.roadmaps.update({track_name.title().strip() : skills})
 
     def add_skill_to_track(self,track_name ,skill):
         track_name = track_name.title().strip()
         if track_name in self.roadmaps:
+          self.exist=True
           self.roadmaps[track_name].append(skill)
         else:
-          return f"Track isn't found! Add it first!"
+          self.exist=False
 
-manager = Skill_Tree_Recommender()
-print(manager.get_Prequirements("   Backend developer"))
-print(manager.get_path("Backend Developer", "OOP"))
-manager.add_track("Data Analyst")
+# manager = Skill_Tree_Recommender()
+# print(manager.get_Prequirements("   Backend developer"))
+# print(manager.get_path("Backend Developer", "OOP"))
+# manager.add_track("Data Analyst")
 
 # manager = Skill_Tree_Recommender()  مينفعش أعملها كده هيبدأ من جديد

@@ -22,10 +22,10 @@ class CarrerAdvisor :
            results.append ((path_name ,match_percentage , list(missing_courses)))
         info = sorted(results, key = lambda x : x[1] , reverse= True)
         return info 
- # To try the output    
-tree_manager = Skill_Tree_Recommender()
-advisor = CarrerAdvisor(tree_manager.roadmaps)
-print(tree_manager.get_all_tracks())
-print(tree_manager.get_Prequirements("Backend Developer"))
-output = advisor.recommend_paths("c++ , oop")
-print(output)
+#  # To try the output    
+# tree_manager = Skill_Tree_Recommender()
+# advisor = CarrerAdvisor(tree_manager.roadmaps)
+# print(tree_manager.get_all_tracks())
+# print(tree_manager.get_Prequirements("Backend Developer"))
+# output = advisor.recommend_paths("c++ , oop")
+# print(output)
