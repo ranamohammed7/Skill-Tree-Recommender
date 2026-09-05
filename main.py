@@ -30,7 +30,7 @@ class Cli_Interface:
 
     def admins(self,name,password):
         admins_names=['Rana','Mariam','Trevena','Jana','Zeinab']
-        if name.lower() in [n.lower() for n in admins_names] and password == "admin":
+        if name.title() in  admins_names and password == "admin":
             return True
         else:
             return False
@@ -83,13 +83,21 @@ while True:
                  print(f"Track '{track_name}' Added Successfully.")
 
         case "5":
-          track_name = input("Enter The Existing Track Name: ")
-          skill_to_add = input("Enter The Skill to Add: ")
-          result = cli.tree_manager.add_skill_to_track(track_name, skill_to_add)
-          if result:
-            print(result)
+          print("Admin authentication required to add a new track.")
+          admin_name = input("Enter Your Admin Name: ")
+          admin_password = input("Enter Your Admin Password: ")
+          if not cli.admins(admin_name, admin_password):
+              print("Authentication failed. You Do Not Have Permission To Add a New Track.")
+              continue
           else:
-            print(f"Skill '{skill_to_add}' Added To Track '{track_name}'.")
+            print("Authentication Successful. You Can Add a New Track.")
+            track_name = input("Enter The Existing Track Name: ")
+            skill_to_add = input("Enter The Skill to Add: ")
+            result = cli.tree_manager.add_skill_to_track(track_name, skill_to_add)
+            if result:
+              print(result)
+            else:
+              print(f"Skill '{skill_to_add}' Added To Track '{track_name}'.")
 
         case"6":
           user_skills = input("Enter Your Skills (Comma-Separated): ")
