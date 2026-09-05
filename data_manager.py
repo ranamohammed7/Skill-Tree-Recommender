@@ -5,7 +5,7 @@ class DataManager:
     ):
         file_path = f"{user_name}_progress.txt"
         try:
-            with open(file_path, "w", encoding="utf-8") as file:
+            with open(file_path, "w") as file:
                 file.write("=== SKILL-TREE RECOMMENDER USER PROGRESS ===\n")
                 file.write(f"User Name: {user_name}\n")
                 file.write(f"Target Track: {target_track}\n")
@@ -23,7 +23,7 @@ class DataManager:
     def load_user_plan(self , user_name):
         file_path = f"{user_name}_progress.txt"
         try:
-            with open(file_path, "r", encoding="utf-8") as file:
+            with open(file_path, "r") as file:
                 content = file.read()
                 if not content.strip():
                     return "File is empty."
@@ -37,7 +37,7 @@ class DataManager:
         
         report_file = f"{user_name}_final_report.txt"
         try:
-            with open(report_file, "w", encoding="utf-8") as file:
+            with open(report_file, "w") as file:
                 file.write("=========================================\n")
                 file.write("       OFFICIAL COMPLETION REPORT        \n")
                 file.write("=========================================\n")
