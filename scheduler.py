@@ -1,4 +1,7 @@
+from colorama import Fore
 import math
+
+
 class SkillLevelScheduler:
     def __init__(self):
         self.skills_hours = {
@@ -53,7 +56,7 @@ class SkillLevelScheduler:
         try:
             weekly_hours = int(weekly_hours)
             if weekly_hours <= 0:
-                print("Weekly hours must be greater than zero")
+                print(Fore.RED+"Weekly Hours Must Be Greater Than Zero"+Fore.RESET)
                 return
 
             skill_hours_list = []
@@ -65,12 +68,12 @@ class SkillLevelScheduler:
                     total_hours += hours
 
             if not skill_hours_list:
-                print("No valid skills found for this level")
+                print(Fore.RED+"No Valid Skills Found For This Level"+Fore.RESET)
                 return
 
             weeks_needed = math.ceil(total_hours / weekly_hours)
-            print(f"\nTotal hours required: {total_hours} hours")
-            print(f"Estimated duration: {weeks_needed} weeks\n")
+            print(f"\nTotal Hours Required: {total_hours} Hours")
+            print(f"Estimated Duration: {weeks_needed} Weeks\n")
 
             days = ("Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
             base_hours = weekly_hours // 7
@@ -108,5 +111,5 @@ class SkillLevelScheduler:
             return weeks_needed
         
         except ValueError:
-            print("Please enter a valid whole number, not text")
+            print("Please Enter A Valid Whole Number, Not Text")
             return

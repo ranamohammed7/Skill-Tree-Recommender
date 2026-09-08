@@ -1,0 +1,12 @@
+===========================================
+   SKILL-TREE RECOMMENDER USER PROGRESS    
+===========================================
+User Name: Mariam
+Target Track/Skills: My Skills Plan
+Estimated Duration: 2 Weeks
+-------------------------------------------
+--- Roadmap Skills Status ---
+[ ] c++
+[ ] oop
+[ ] linux
+===========================================

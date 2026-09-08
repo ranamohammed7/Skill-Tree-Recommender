@@ -1,0 +1,16 @@
+===========================================
+   SKILL-TREE RECOMMENDER USER PROGRESS    
+===========================================
+User Name: Rana
+Target Track/Skills: Backend Developer
+Estimated Duration: 4 Weeks
+-------------------------------------------
+--- Roadmap Skills Status ---
+[✅] C++
+[✅] OOP
+[✅] Data Structures
+[✅] Algorithms
+[✅] SQL
+[✅] Databases
+[✅] Git
+===========================================
